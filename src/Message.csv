@@ -1,0 +1,58 @@
+INTR,Any,Any,"Hi {NTWRK} support,"
+INTR,Any,Any,"Hello,"
+INTR,Any,Any,"Hi dear {NTWRK} support,"
+INTR,Any,Any,
+INTR,Any,Any,"Hi, dear {NTWRK} support"
+MAIN,Any,Channel,"this channel spreads and publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"this channel publish {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"channel distributes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"this channel distributes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"this channel distributes {CTNT1}, {CTNT2},  and {CTNT3}."
+MAIN,Any,Channel,"channel publish {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"My report is about that this channel spreads and publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"My report is about that this channel publish {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"My report is about that this channel distributes {CTNT1}, {CTNT2}, and {CTNT3}."
+MAIN,Any,Channel,"My complaint  is about that channel publish {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"My report is about that this channel distributes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"My complaint is about that this channel distributes {CTNT1}, {CTNT2},  and {CTNT3}."
+MAIN,Any,Channel,"This report is about that this channel spreads and publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,ACCOUNT,"my report is about that this account publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,ACCOUNT,"my complaint is about that this account publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,ACCOUNT,"my complaint is about that this account distributes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,ACCOUNT,"my report is about that this account distributes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,ACCOUNT,"this account distributes {CTNT1}, {CTNT2}, and {CTNT3}."
+MAIN,Any,ACCOUNT,"this account distributes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,ACCOUNT,"That account is publisher of {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,ACCOUNT,"That account is publisher of {CTNT1}, {CTNT2}, and {CTNT3}."
+MAIN,Any,ACCOUNT,"That report is about the publisher of {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,ACCOUNT,"That report is about the publisher of the {CTNT1}, {CTNT2}, and {CTNT3}."
+MAIN,Any,Any,"That {TYPE} contains  the {CTNT1}, {CTNT2}, and {CTNT3}."
+MAIN,Any,Any,"That {TYPE} contains  the {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Any,"{TYPE} is sharing {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Any,"{TYPE} is sharing {CTNT1}, {CTNT2},  and {CTNT3}."
+MAIN,Any,Any,"This {TYPE} has a parts of {CTNT1}, {CTNT2},  and {CTNT3}."
+MAIN,Any,Any,"This {TYPE} has a parts of {CTNT1}, {CTNT2}, {CTNT3}."
+MAIN,Any,Any,"This {TYPE} has a parts of {CTNT1}, {CTNT2}, {CTNT3}, {CTNT4}."
+MAIN,Any,Any,"{TYPE} has a parts of {CTNT1}, {CTNT2},  and {CTNT3}."
+MAIN,Any,Any,"{TYPE} has parts of {CTNT1}, {CTNT2}, {CTNT3}."
+MAIN,Any,Any,"{TYPE} has the parts of {CTNT1}, {CTNT2}, {CTNT3}, {CTNT4}."
+MAIN,Any,Any,"My report is about that the this contains  the {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Any,"That  report is about this, because it contains  the {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Any,"My report is about that the this contains  the {CTNT1}, {CTNT2}, {CTNT4}."
+MAIN,Any,Any,"That  report is about this, because it contains  the {CTNT4}, {CTNT1}, {CTNT2} and {CTNT3}."
+MAIN,Any,Any,"My complaint is about this {TYPE} that contains {CTNT1}, {CTNT2}, {CTNT4} and {CTNT3}."
+MAIN,Any,Any,"My complaint because of this {TYPE} that contains {CTNT2}, {CTNT3}, {CTNT4} and {CTNT1}."
+BLCK,Any,Any,Please block it because of illegal!
+BLCK,Any,Any,Block it to avoid deaths!
+BLCK,Any,Any,Please block it because of international law!
+BLCK,Any,Any,Block it!
+BLCK,Any,Channel,This channel is illegal. Block it to avoid deaths!
+BLCK,Any,Any,This {TYPE} can cause deaths of civil people. Block it!
+BLCK,Any,Any,Please review my report and block it!
+BLCK,Any,Any,"This {TYPE}  helps to kill innocent Ukranian people, block it!"
+BLCK,Any,Any,Please review my report and block it!
+BLCK,Any,Any,"This report isn't groundless, review it and block that {TYPE}!"
+BLCK,Any,Any,Please block it as soon as possible!
+BLCK,Any,Any,"Please, block it to avoid deaths as soon as possible!"
+TXT,Any,Any,INTR*n*MAIN*n*BLCK
+TXT,Any,Any,MAIN*n*BLCK
