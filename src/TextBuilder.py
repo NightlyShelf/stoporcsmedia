@@ -3,6 +3,10 @@ from enum import Enum
 import csv
 import random as rn
 
+#Now we don't use nltk in connection with bugs :(
+
+#import nltk
+#from nltk.corpus import wordnet as wn
 
 class Report(Enum):
     EMAIL = 1
@@ -16,7 +20,21 @@ class TextBuilder():
         self.linkscopy = []
         self.nick = nick
         self.header = ""
-
+        #NLTK import part
+        '''
+        try:
+            nltk.word_tokenize('foobar')
+        except LookupError:
+            nltk.download('punkt')
+        try:
+            nltk.pos_tag(nltk.word_tokenize('foobar'))
+        except LookupError:
+            nltk.download('averaged_perceptron_tagger')
+        try:
+            wn.synsets("have")
+        except LookupError:
+            nltk.download("omw-1.4")
+        '''
     def build(self):
         message = ""
         crimeslist = []
@@ -66,10 +84,13 @@ class TextBuilder():
                 message = message.replace("{TYPE}", self.resource.tags.type.value)
                 message = message.replace("{ALINK}", self.resource.links.alink)
                 message = message.replace("{NICK}", self.nick)
-                message = message.replace("*dn*", "\n")
-                message = message.replace("*n*", "\n")
+                message = message.replace("*dn*", " \n\n ")
+                message = message.replace("*n*", " \n ")
+
+                #DON'T UNCOMMIT!
+                #message = self.NLProcessing(message)
+
                 self.header = self.GetRandomVariant("HEADER", 2, generatorlist, crimeslist)
-                return message
             except FileNotFoundError:
                 raise FileNotFoundError
         else:
@@ -90,9 +111,9 @@ class TextBuilder():
                 message = message.replace("{TYPE}", self.resource.tags.type.value)
                 message = message.replace("{NTWRK}", self.resource.tags.network.value)
                 message = message.replace("*n*", "\n")
-                return message
             except FileNotFoundError:
                 raise FileNotFoundError
+        return message
 
     def GetRandomVariant(self, key, contentkey, variantslist, crimes):
         variants = []
@@ -128,3 +149,37 @@ class TextBuilder():
             return r
         else:
             return rn.choice(variants)[contentkey]
+
+    #NOT WORKING, corrupts text with incorrect synonymous (is it a bug of AI?)
+    #EDIT: Tested, it is a bug of AI of using incorrect words. Let's don't use it, maybe we should use file with synonyms instead?
+    """
+    def NLProcessing(self, text):
+        final = text
+        words = nltk.word_tokenize(text, "english")
+        print(words)
+        for word in words:
+            if(word in ".,/?<>|\\\"\';:{[}]+=_-)(*&^%$#@!~`" or "(" in word or ")" in word or "[" in word or "]" in word or "{" in word or "}" in word or "*" in word or len(word) <= 1): continue
+            else:
+                if(rn.randint(1,4) == 3):
+                    wordlower = word.lower()
+                    s = wn.synsets(wordlower)
+                    if(s == []): continue
+                    a = rn.choice(s).lemma_names()
+                    if(a == []): continue
+                    print(a)
+                    x = True
+                    while x:
+                        syn = rn.choice(a)
+                        if(a == wordlower and len(a) >= 2):
+                            continue
+                        if(len(a) == 1):
+                            break
+                        else:
+                            break
+                    final = final.replace(word, syn)
+                    print("Word: ", word)
+                    print("Synonym: ", syn)
+        return final
+        """
+
+
