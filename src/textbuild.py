@@ -1,12 +1,14 @@
-from Task import *
-from enum import Enum
 import csv
 import random as rn
+from enum import Enum
 
-#Now we don't use nltk in connection with bugs :(
+from task import *
 
-#import nltk
-#from nltk.corpus import wordnet as wn
+
+# Now we don't use nltk in connection with bugs :(
+
+# import nltk
+# from nltk.corpus import wordnet as wn
 
 class Report(Enum):
     EMAIL = 1
@@ -20,7 +22,7 @@ class TextBuilder():
         self.linkscopy = []
         self.nick = nick
         self.header = ""
-        #NLTK import part
+        # NLTK import part
         '''
         try:
             nltk.word_tokenize('foobar')
@@ -35,6 +37,7 @@ class TextBuilder():
         except LookupError:
             nltk.download("omw-1.4")
         '''
+
     def build(self):
         message = ""
         crimeslist = []
@@ -87,8 +90,8 @@ class TextBuilder():
                 message = message.replace("*dn*", " \n\n ")
                 message = message.replace("*n*", " \n ")
 
-                #DON'T UNCOMMIT!
-                #message = self.NLProcessing(message)
+                # DON'T UNCOMMIT!
+                # message = self.NLProcessing(message)
 
                 self.header = self.GetRandomVariant("HEADER", 2, generatorlist, crimeslist)
             except FileNotFoundError:
@@ -150,8 +153,8 @@ class TextBuilder():
         else:
             return rn.choice(variants)[contentkey]
 
-    #NOT WORKING, corrupts text with incorrect synonymous (is it a bug of AI?)
-    #EDIT: Tested, it is a bug of AI of using incorrect words. Let's don't use it, maybe we should use file with synonyms instead?
+    # NOT WORKING, corrupts text with incorrect synonymous (is it a bug of AI?)
+    # EDIT: Tested, it is a bug of AI of using incorrect words. Let's don't use it, maybe we should use file with synonyms instead?
     """
     def NLProcessing(self, text):
         final = text
@@ -181,5 +184,3 @@ class TextBuilder():
                     print("Synonym: ", syn)
         return final
         """
-
-

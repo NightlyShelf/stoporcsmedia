@@ -1,5 +1,5 @@
 class Links():
-    def __init__(self, Alink, Exlinks):
+    def __init__(self, Alink, Exlinks = []):
         self.alink = Alink
         self.exlinks = Exlinks
 
