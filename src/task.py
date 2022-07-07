@@ -1,6 +1,4 @@
 from textbuild import *
-
-
 class Task():
     def __init__(self, form, resource):
         self.form = form

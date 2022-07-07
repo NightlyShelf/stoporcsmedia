@@ -8,10 +8,11 @@ class Tags():
         self.type = type
 
 
+#IF EDITING, CONSIDER YOU CHANGED IT IN compiler.py (GenerateManual function)
 class Network(Enum):
     IN = "Instagram"
     FB = "Facebook"
-    TT = "Tik Tok"
+    TT = "TikTok"
     TG = "Telegram"
     TW = "Twitter"
     YT = "Youtube"

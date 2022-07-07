@@ -10,9 +10,9 @@ while True:
                                                              Exlink(Crimes.hsp,
                                                                     "https://twitter.com/GazetaRu/status/1534842132388892674?s=20&t=NAKVMpiBdSNDlzlUi1v4NQ"),
                                                              Exlink(Crimes.dfk,
-                                                                    "https://twitter.com/GazetaRu/status/1534833652508422144?s=20&t=NAKVMpiBdSNDlzlUi1v4NQ"),
-                                                             Exlink(Crimes.iui,
-                                                                    "https://twitter.com/GazetaRu/status/1534823512694833152?s=20&t=NAKVMpiBdSNDlzlUi1v4NQ")]))
+                                                                    "https://twitter.com/GazetaRu/status/1534833652508422144?s=20&t=NAKVMpiBdSNDlzlUi1v4NQ") ]))#,
+                                                             #Exlink(Crimes.iui,
+                                                                    #"https://twitter.com/GazetaRu/status/1534823512694833152?s=20&t=NAKVMpiBdSNDlzlUi1v4NQ")]))
     b = Task(Report.EMAIL, testres)
     b.SetNick("Test")
     print("This test shows you how this module works. You can see the email and message to support below, which is almost unique.")
