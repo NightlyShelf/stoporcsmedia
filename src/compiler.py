@@ -268,6 +268,22 @@ if __name__ == "__main__":
             print(f"Unrecognized argument "+arg+". Check it rightness and restart the program.\nExit code: 2.")
             input()
             sys.exit(2)
+    if (mode == None):
+        print("Error (Missing mode). Seems to be \"-mode\" argument missing or incorrect data provided?")
+        input()
+        sys.exit(2)
+    if (wmode == None):
+        print("Error (Missing writing mode). Seems to be \"-wmode\" argument missing or incorrect data provided?")
+        input()
+        sys.exit(2)
+    if (datain == None):
+        print("Error (Missing input data). Seems to be \"-datain\" argument missing or incorrect data provided?")
+        input()
+        sys.exit(2)
+    if (dataout == None):
+        print("Error (Missing output data). Seems to be \"-dataout\" argument missing or incorrect data provided?")
+        input()
+        sys.exit(2)
     print("Success!")
     compiler = Compiler(mode, wmode, datain, dataout)
     compiler.Generate()
