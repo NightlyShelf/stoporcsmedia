@@ -145,7 +145,6 @@ class Compiler:
         print("Auto generating is not available right now. Exiting...")
         input()
         sys.exit(0)
-        pass
     def Generate(self):
         print("Beginning generation...")
         self.final = None
@@ -162,7 +161,7 @@ class Compiler:
                         f.write(b"\n")
                     print("Successfully wrote to file!")
                 except Exception as ex:
-                    print("Error occured: ", ex.args)
+                    print("Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
                     sys.exit(1)
             else:
@@ -173,7 +172,7 @@ class Compiler:
                         f.write(b"\n")
                     print("Successfully wrote to file!")
                 except Exception as ex:
-                    print("Error occured: ", ex.args)
+                    print("Error occured while writing to file: "+self.dataout+". Try again or choose another file/location.\nExiting...")
                     input()
                     sys.exit(1)
         elif self.mode == CMode.AUTO:
@@ -189,7 +188,11 @@ class Compiler:
                 print("Success!")
 
             except Exception as ex:
-                print("Error occured: ", ex.args)
+                print("Error occured: unable to read or parse "+self.datain+". Check its availability and try again.")
+                input()
+                sys.exit(1)
+            if self.links == []:
+                print("Warning: provided file with input data ("+self.datain+") is empty or corrupted. Nothing to generate.\nExiting...")
                 input()
                 sys.exit(1)
             for link in self.links:
@@ -203,7 +206,7 @@ class Compiler:
                             f.write(b"\n")
                     print("Successfully wrote to file!")
                 except Exception as ex:
-                    print("Error occured: ", ex.args)
+                    print("Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
                     sys.exit(1)
             else:
@@ -215,7 +218,7 @@ class Compiler:
                             f.write(b"\n")
                     print("Successfully wrote to file!")
                 except Exception as ex:
-                    print("Error occured: ", ex.args)
+                    print("Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
                     sys.exit(1)
 
@@ -270,10 +273,3 @@ if __name__ == "__main__":
     compiler.Generate()
     print("Success! You can see changes in your file. Good luck!")
     input()
-    #test
-    #compiler = Compiler(CMode.MANUAL, WriteMode.REWRITE, "rt=email|f=acnt|n=twtr|c=iui,dfk,hsp,iui|lnk=https:/twitter.com/gazetaru|exl=iui#https://twitter.com/GazetaRu/status/1534849682576445440?s=20`t=1ZyTeGS74miMYloG6kep7g~dfk#https://twitter.com/GazetaRu/status/1534842132388892674?s=20`t=NAKVMpiBdSNDlzlUi1v4NQ")
-    #argstest = .split("|")
-    #task = GenerateManual(argstest)
-    #task.SetNick("Test")
-    #print(task.GenerateMessage())
-
