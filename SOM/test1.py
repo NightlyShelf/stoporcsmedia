@@ -1,5 +1,5 @@
 from task import *
-from resource import *
+from SOM.resource import *
 from tags import *
 from links import *
 # Serialization

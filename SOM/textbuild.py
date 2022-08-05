@@ -2,8 +2,8 @@ import csv
 import random as rn
 from enum import Enum
 
-from task import *
-from tags import *
+from SOM.task import *
+from SOM.tags import *
 import copy as cp
 
 # Now we don't use nltk in connection with bugs :(
@@ -17,12 +17,15 @@ class Report(Enum):
 
 
 class TextBuilder:
-    def __init__(self, resource, complaintype, nick):
+    def __init__(self, resource, complainttype, nick, message_source, email_source):
         self.resource = resource
-        self.complainttype = complaintype
+        self.complainttype = complainttype
         self.linkscopy = []
         self.nick = nick
         self.header = ""
+        self.message_source = message_source
+        self.email_source = email_source
+
         # NLTK import part
         '''
         try:
@@ -52,7 +55,7 @@ class TextBuilder:
         if (self.complainttype == Report.EMAIL):
             generatorlist = []
             try:
-                f = open("Email.csv", "r")
+                f = open(self.email_source, "r")
                 csvr = csv.reader(f, dialect="excel")
                 for row in csvr:
                     network, crime, content, key = row[0], row[1], row[2], row[3]
@@ -117,16 +120,18 @@ class TextBuilder:
                 message = message.replace("*dn*", " \n\n ")
                 message = message.replace("*n*", " \n ")
 
-                # DON'T UNCOMMIT!
+                # DON'T UNCOMMENT!
                 # message = self.NLProcessing(message)
 
                 self.header = self.GetRandomVariant("HEADER", 2, generatorlist, crimeslist)
+                self.header = self.header.replace("{NTWRK}", self.resource.tags.network.value)
+                self.header = self.header.replace("{TYPE}", self.resource.tags.type.value)
             except FileNotFoundError:
                 raise FileNotFoundError
         else:
             generatorlist = []
             try:
-                f = open("Message.csv", "r")
+                f = open(self.message_source, "r")
                 csvr = csv.reader(f, dialect="excel")
                 for row in csvr:
                     key, network, type, content = row[0], row[1], row[2], row[3]
@@ -161,11 +166,11 @@ class TextBuilder:
             res = r[contentkey]
             self.variants.remove(r)
             if(self.linkscopy == []):
+
                 #print("Using again;" , self.linkscopy)
                 exlink = rn.choice(self.linkscopy2)
                 res = res.replace("{LINK}", exlink.link)
                 res = res.replace("{CTNT}", exlink.crime.value)
-                self.linkscopy2.remove(exlink)
                 return res
             #print(rn.choice(self.linkscopy))
             exlink = rn.choice(self.linkscopy)

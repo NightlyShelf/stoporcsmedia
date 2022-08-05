@@ -29,7 +29,20 @@ class Crimes(Enum):
     ofs = "offensive speech"
     dfk = "disinformation and distribution fakes"
     dpd = "distribution of personal data and information"
+class CrimesSwitcher:
+    switcher = {
+        "mup": Crimes.mup,
+        "aup": Crimes.aup,
+        "dfk": Crimes.dfk,
+        "dpd": Crimes.dpd,
+        "hsp": Crimes.hsp,
 
+        "iui": Crimes.iui,
+        "msc": Crimes.msc,
+        "ofs": Crimes.ofs,
+        "pkp": Crimes.pkp,
+        "pwr": Crimes.pwr
+    }
 
 class Type(Enum):
     # Accounts:
