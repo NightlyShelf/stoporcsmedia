@@ -8,7 +8,6 @@ import bs4
 from SOM.links import *
 from SOM.resource import *
 from SOM.task import *
-from SOM.tags import *
 
 
 # MANUAL MODE TEST: compiler.exe -mode=manual -wmode=rewrite -datain=rt=email[f=acnt[n=twtr[c=iui,dfk,hsp,
@@ -47,14 +46,14 @@ class Compiler:
         if consolemode:
             print("Analysing input data...")
         for key in keys:
-            if ("rt=" in key):
+            if "rt=" in key:
                 key = key.replace("rt=", "").lower()
-                if (key == "message"):
+                if key == "message":
                     report_type = Report.MESSAGE
-                elif (key == "email"):
+                elif key == "email":
                     report_type = Report.EMAIL
                 continue
-            elif ("f=" in key):
+            elif "f=" in key:
                 form = key.replace("f=", "").lower()
                 switcher = {
                     "chnl": Type.CH,
@@ -65,7 +64,7 @@ class Compiler:
                 }
                 content_type = switcher.get(form)
                 continue
-            elif ("n=" in key):
+            elif "n=" in key:
                 form = key.replace("n=", "").lower()
                 switcher = {
                     "twtr": Network.TW,
@@ -77,18 +76,18 @@ class Compiler:
                 }
                 network = switcher.get(form)
                 continue
-            elif ("c=" in key):
+            elif "c=" in key:
                 crimesn = key.replace("c=", "").lower().split(",")
                 crimes = []
                 for crime in crimesn:
                     crimes.append(CrimesSwitcher.switcher.get(crime))
                 content_crimes = crimes
                 continue
-            elif ("lnk=" in key):
+            elif "lnk=" in key:
                 content_link = key.replace("lnk=", "")
                 continue
             # Not obligatory
-            elif ("exl=" in key):
+            elif "exl=" in key:
                 links = key.replace("exl=", "").split("~")
                 linksfin = []
                 for link in links:
@@ -106,52 +105,52 @@ class Compiler:
                     sys.exit(2)
                 return "Invaild key"
         # test: rt=message|f=twet|n=twtr|c=iui,dfk,hsp,iui|lnk=https:/twitter.com/gazetaru|exl=iui#https://twitter.com/GazetaRu/status/1534849682576445440?s=20`t=1ZyTeGS74miMYloG6kep7g~dfk#https://twitter.com/GazetaRu/status/1534842132388892674?s=20`t=NAKVMpiBdSNDlzlUi1v4NQ
-        if (report_type == None):
+        if report_type == None:
             if consolemode:
                 print("Error (Missing report type). Seems to be \"rt=\" argument missing or incorrect data provided?")
                 input()
                 sys.exit(2)
             return "Missing rt"
-        if (content_type == None):
+        if content_type == None:
             if consolemode:
                 print("Error (Missing content type). Seems to be \"f=\" argument missing or incorrect data provided?")
                 input()
                 sys.exit(2)
             return "Missing ct"
-        if (network == None):
+        if network == None:
             if consolemode:
                 print("Error (Missing network type). Seems to be \"n=\" argument missing or incorrect data provided?")
                 input()
                 sys.exit(2)
             return "Missing nt"
-        if (content_crimes == None):
+        if content_crimes == None:
             if consolemode:
                 print("Error (Missing content crimes). Seems to be \"c=\" argument missing or incorrect data provided?")
                 input()
                 sys.exit(2)
             return "Missing cc"
-        if (content_link == None):
+        if content_link == None:
             if consolemode:
                 print("Error (Missing link). Seems to be \"l=\" argument missing or incorrect data provided?")
                 input()
                 sys.exit(2)
             return "Missing lnk"
         if consolemode:
-            print("Sucessfull!")
+            print("Successful!")
             print("Task object generated successful!")
         return Task(report_type,
                     Resource(Tags(network, content_type, content_crimes), Links(content_link, content_clinks)))
 
     def GenerateAuto(self, link, consolemode=False):
-        if (consolemode):
+        if consolemode:
             print("Beginning generation for " + link + "...")
         network = None
         type = None
         crimes = None
         reporttype = None
         exlinks = None
-        if (not "https://" in link or "http://" in link or "www." in link):
-            if (consolemode):
+        if not "https://" in link or "http://" in link or "www." in link:
+            if consolemode:
                 print("Link hasn't got \"https://\" prefix. Adding it...")
             link = link.replace("http://", "")
             link = link.replace("www.", "")
@@ -159,43 +158,43 @@ class Compiler:
             link = "https://" + link
         thelink = link
         # Telegram
-        if ("t.me/" in link):
-            if (consolemode):
+        if "t.me/" in link:
+            if consolemode:
                 print("Network: Telegram")
             network = Network.TG
             try:
                 webpage = urllib.request.urlopen(link)
                 source = webpage.read()
                 soup = bs4.BeautifulSoup(source, "html.parser")
-                if (soup.find("a", "tgme_page_context_link") != None or "/s/" in link):
+                if soup.find("a", "tgme_page_context_link") != None or "/s/" in link:
                     type = Type.CH
-                    if (consolemode):
+                    if consolemode:
                         print("Type: Channel")
-                    if (random.randint(1, Compiler.TASKTYPECOEF) == 1):
-                        if (consolemode):
+                    if random.randint(1, Compiler.TASKTYPECOEF) == 1:
+                        if consolemode:
                             print("Report type: Email")
                         reporttype = Report.EMAIL
                     else:
-                        if (consolemode):
+                        if consolemode:
                             print("Report type: Message")
                         reporttype = Report.MESSAGE
-                elif (soup.find("div", "tgme_page_widget") != None):
+                elif soup.find("div", "tgme_page_widget") != None:
                     type = Type.GN
-                    if (consolemode):
+                    if consolemode:
                         print("Type: Publication")
                         print("Report type: Message")
                     reporttype = Report.MESSAGE
                 else:
                     type = Type.AC
-                    if (consolemode):
+                    if consolemode:
                         print("Type: Account")
 
-                    if (random.randint(1, Compiler.TASKTYPECOEF) == 1):
-                        if (consolemode):
+                    if random.randint(1, Compiler.TASKTYPECOEF) == 1:
+                        if consolemode:
                             print("Report type: Email")
                         reporttype = Report.EMAIL
                     else:
-                        if (consolemode):
+                        if consolemode:
                             print("Report type: Message")
                         reporttype = Report.MESSAGE
 
@@ -204,7 +203,7 @@ class Compiler:
                     print(
                         "Detected problem while connecting to the " + link + ". Press Enter to skip or write Exit to exit...")
                     a = input()
-                    if (a.lower() == "exit"):
+                    if a.lower() == "exit":
                         print("Exiting...")
                         sys.exit(1)
                 else:
@@ -221,7 +220,7 @@ class Compiler:
                     webpage = urllib.request.urlopen(comlink)
                     soup = bs4.BeautifulSoup(webpage.read(), "html.parser")
                     linksex = []
-                    if (soup.find_all("a", "tgme_widget_message_date") == []):
+                    if soup.find_all("a", "tgme_widget_message_date") == []:
                         exlinks = None
                     else:
                         for linkk in soup.find_all("a", "tgme_widget_message_date"):
@@ -237,7 +236,7 @@ class Compiler:
                         print(
                             "Detected problem while connecting to the " + link + ". Press Enter to skip or write Exit to exit...")
                         a = input()
-                        if (a.lower() == "exit"):
+                        if a.lower() == "exit":
                             print("Exiting...")
                             sys.exit(1)
                     else:
@@ -253,7 +252,7 @@ class Compiler:
                 reporttype = Report.EMAIL
             else:
                 reporttype = Report.MESSAGE
-        #Facebook
+        # Facebook
         elif "facebook.com/" in link:
             network = Network.FB
             type = Type.AC
@@ -264,7 +263,7 @@ class Compiler:
                 reporttype = Report.EMAIL
             else:
                 reporttype = Report.MESSAGE
-        #Twitter
+        # Twitter
         elif "twitter.com/" in link or "t.co/" in link:
             network = Network.TW
             type = Type.AC
@@ -272,7 +271,7 @@ class Compiler:
             for i in range(random.randint(4, 8)):
                 crimes.append(random.choice(list((CrimesSwitcher.switcher.values()))))
             reporttype = Report.MESSAGE
-        #TikTok
+        # TikTok
         elif "tiktok.com/" in link:
             network = Network.TT
             if "@" in link:
@@ -289,7 +288,7 @@ class Compiler:
                 for i in range(random.randint(4, 8)):
                     crimes.append(random.choice(list((CrimesSwitcher.switcher.values()))))
                 reporttype = Report.MESSAGE
-        #YouTube
+        # YouTube
         elif "youtube.com/" in link:
             network = Network.YT
             if "watch" in link:
@@ -312,7 +311,7 @@ class Compiler:
                 print(
                     "Problem occured: Error while creating Ressource object. Seems to be incorrect data provided. Contact the technical administrator. Press Enter to skip or write Exit to exit...")
                 a = input()
-                if (a.lower() == "exit"):
+                if a.lower() == "exit":
                     print("Exiting...")
                     sys.exit(1)
             else:
@@ -324,13 +323,13 @@ class Compiler:
     def Test(self, obj):
         task = pc.loads(obj)
         text = "TASK OBJECT SUMMARY:\n"
-        text += "Type: "+str(task.resource.tags.type.value)+"\n"
-        text += "Network: "+str(task.resource.tags.network.value)+"\n"
-        text += "Report format: "+str(task.form.value)+"\n"
-        text += "Resource link: "+str(task.resource.links.alink)+"\n"
-        text += "Crimes: "+str(task.resource.tags.crimes)+"\n"
-        text += "Exlinks: "+str(task.resource.links.exlinks)+"\n"
-        text += "Report sample: "+str(task.GenerateMessage())+"\n\n"
+        text += "Type: " + str(task.resource.tags.type.value) + "\n"
+        text += "Network: " + str(task.resource.tags.network.value) + "\n"
+        text += "Report format: " + str(task.form.value) + "\n"
+        text += "Resource link: " + str(task.resource.links.alink) + "\n"
+        text += "Crimes: " + str(task.resource.tags.crimes) + "\n"
+        text += "Exlinks: " + str(task.resource.links.exlinks) + "\n"
+        text += "Report sample: " + str(task.GenerateMessage()) + "\n\n"
         return text
 
     def Generate(self):
@@ -348,7 +347,7 @@ class Compiler:
                         print("Successfully encoded object!")
                         f.write(b"\n")
                     print("Successfully wrote to file!")
-                except Exception as ex:
+                except Exception:
                     print(
                         "Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
@@ -360,7 +359,7 @@ class Compiler:
                         f.write(pc.dumps(self.final))
                         f.write(b"\n")
                     print("Successfully wrote to file!")
-                except Exception as ex:
+                except Exception:
                     print(
                         "Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
@@ -441,7 +440,8 @@ class Compiler:
                         f.write(finaltext)
                         print("Success!")
                 except Exception as ex:
-                    print("Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
+                    print(
+                        "Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
                     sys.exit(1)
             else:
@@ -451,10 +451,10 @@ class Compiler:
                         f.write(finaltext)
                         print("Success!")
                 except Exception as ex:
-                    print("Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
+                    print(
+                        "Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
                     sys.exit(1)
-
 
 
 if __name__ == "__main__":
@@ -508,19 +508,19 @@ if __name__ == "__main__":
             print(f"Unrecognized argument " + arg + ". Check it rightness and restart the program.\nExit code: 2.")
             input()
             sys.exit(2)
-    if (mode == None):
+    if mode:
         print("Error (Missing mode). Seems to be \"-mode\" argument missing or incorrect data provided?")
         input()
         sys.exit(2)
-    if (wmode == None):
+    if wmode:
         print("Error (Missing writing mode). Seems to be \"-wmode\" argument missing or incorrect data provided?")
         input()
         sys.exit(2)
-    if (datain == None):
+    if datain:
         print("Error (Missing input data). Seems to be \"-datain\" argument missing or incorrect data provided?")
         input()
         sys.exit(2)
-    if (dataout == None):
+    if dataout:
         print("Error (Missing output data). Seems to be \"-dataout\" argument missing or incorrect data provided?")
         input()
         sys.exit(2)

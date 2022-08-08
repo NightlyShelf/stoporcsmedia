@@ -14,7 +14,8 @@ class Task():
         self.resource = resource
 
     def GenerateMessage(self):
-        builder = TextBuilder(self.resource, self.form, Task.nick, Task.messagesource, Task.emailsource)
+        builder = TextBuilder(self.resource, self.form, Task.nick)
+        builder.LoadSources(self.emailsource, self.messagesource)
         self.message = builder.build()
 
         if self.form == Report.EMAIL:

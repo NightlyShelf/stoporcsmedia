@@ -1,10 +1,12 @@
-import csv
-import random as rn
-from enum import Enum
-
-from SOM.task import *
-from SOM.tags import *
 import copy as cp
+import random as rn
+import random
+import csv
+import translatepy.translators.google as tr
+
+from SOM.tags import *
+from SOM.task import *
+
 
 # Now we don't use nltk in connection with bugs :(
 
@@ -16,15 +18,14 @@ class Report(Enum):
     MESSAGE = 2
 
 
+
 class TextBuilder:
-    def __init__(self, resource, complainttype, nick, message_source, email_source):
+    def __init__(self, resource, complainttype, nick):
         self.resource = resource
         self.complainttype = complainttype
         self.linkscopy = []
         self.nick = nick
         self.header = ""
-        self.message_source = message_source
-        self.email_source = email_source
 
         # NLTK import part
         '''
@@ -42,6 +43,135 @@ class TextBuilder:
             nltk.download("omw-1.4")
         '''
 
+    def LoadSources(self, email_source, message_source):
+        try:
+            with open(email_source, "r") as es:
+                self.emsrc = csv.reader(es, dialect="excel")
+                temp = []
+                for row in self.emsrc:
+                    temp.append(row)
+                self.emsrc = temp
+            with  open(message_source, "r") as ms:
+                self.mssrc = csv.reader(ms, dialect="excel")
+                temp = []
+                for row in self.mssrc:
+                    temp.append(row)
+                self.mssrc = temp
+        except Exception as ex:
+            raise ex
+
+    def AntiSpamParsing(self, text):
+        result = ""
+        for char in text:
+
+            if char == "o":
+                if random.choice([True, False]):
+                    char = "о"
+            elif char == "о":
+                if random.choice([True, False]):
+                    char = "o"
+
+            if char == "e":
+                if random.choice([True, False]):
+                    char = "е"
+            elif char == "е":
+                if random.choice([True, False]):
+                    char = "e"
+
+            if char == "E":
+                if random.choice([True, False]):
+                    char = "Е"
+            elif char == "Е":
+                if random.choice([True, False]):
+                    char = "E"
+
+            if char == "О":
+                if random.choice([True, False]):
+                    char = "O"
+            elif char == "O":
+                if random.choice([True, False]):
+                    char = "О"
+
+            if char == "A":
+                if random.choice([True, False]):
+                    char = "А"
+            elif char == "А":
+                if random.choice([True, False]):
+                    char = "A"
+
+            if char == "a":
+                if random.choice([True, False]):
+                    char = "а"
+            elif char == "а":
+                if random.choice([True, False]):
+                    char = "a"
+
+            if char == "Н":
+                if random.choice([True, False]):
+                    char = "Н"
+            elif char == "Н":
+                if random.choice([True, False]):
+                    char = "Н"
+
+            if char == "T":
+                if random.choice([True, False]):
+                    char = "Т"
+            elif char == "Т":
+                if random.choice([True, False]):
+                    char = "T"
+
+            if char == "К":
+                if random.choice([True, False]):
+                    char = "K"
+            elif char == "K":
+                if random.choice([True, False]):
+                    char = "К"
+
+            if char == "C":
+                if random.choice([True, False]):
+                    char = "С"
+            elif char == "С":
+                if random.choice([True, False]):
+                    char = "C"
+
+            if char == "c":
+                if random.choice([True, False]):
+                    char = "с"
+            elif char == "с":
+                if random.choice([True, False]):
+                    char = "c"
+
+            if char == "i":
+                if random.choice([True, False]):
+                    char = "і"
+            elif char == "і":
+                if random.choice([True, False]):
+                    char = "i"
+
+            if char == "р":
+                if random.choice([True, False]):
+                    char = "p"
+            elif char == "p":
+                if random.choice([True, False]):
+                    char = "р"
+
+            if char == "Р":
+                if random.choice([True, False]):
+                    char = "P"
+            elif char == "P":
+                if random.choice([True, False]):
+                    char = "Р"
+
+            if char == "B":
+                if random.choice([True, False]):
+                    char = "В"
+            elif char == "В":
+                if random.choice([True, False]):
+                    char = "B"
+
+            result += char
+        return result
+
     def build(self):
         message = ""
         crimeslist = []
@@ -54,100 +184,95 @@ class TextBuilder:
             crimeslist.append(crime.value)
         if (self.complainttype == Report.EMAIL):
             generatorlist = []
-            try:
-                f = open(self.email_source, "r")
-                csvr = csv.reader(f, dialect="excel")
-                for row in csvr:
-                    network, crime, content, key = row[0], row[1], row[2], row[3]
-                    if (network == "Any" or network == self.resource.tags.network.value) and (
-                            crime == "Any" or crime in crimeslist):
-                        generatorlist.append(row)
-                self.generatorlist = generatorlist
-                f.close()
-                message = self.GetRandomVariant("TXT", 2, generatorlist, crimeslist)
-                message = message.replace("GRRR", self.GetRandomVariant("GRRR", 2, self.generatorlist, crimeslist))
-                message = message.replace("APPP", self.GetRandomVariant("APPP", 2, self.generatorlist, crimeslist))
-                message = message.replace("RSSS", self.GetRandomVariant("RSSS", 2, self.generatorlist, crimeslist))
-                message = message.replace("GBBB", self.GetRandomVariant("GBBB", 2, self.generatorlist, crimeslist))
-                message = message.replace("BLLL", self.GetRandomVariant("BLLL", 2, self.generatorlist, crimeslist))
-                message = message.replace("ENDD", self.GetRandomVariant("ENDD", 2, self.generatorlist, crimeslist))
-                message = message.replace("GREET", self.GetRandomVariant("GREET", 2, self.generatorlist, crimeslist))
-                message = message.replace("PREV", self.GetRandomVariant("PREV", 2, self.generatorlist, crimeslist))
-                message = message.replace("FACT", self.GetRandomVariant("FACT", 2, self.generatorlist, crimeslist))
-                message = message.replace("EXPL", self.GetRandomVariant("EXPL", 2, self.generatorlist, crimeslist))
-                message = message.replace("DEMD", self.GetRandomVariant("DEMD", 2, self.generatorlist, crimeslist))
-                if (self.resource.tags.type == Type.AC or self.resource.tags.type == Type.CH) and self.linkscopy != None and self.linkscopy != []:
+            for row in self.emsrc:
+                network, crime, content, key = row[0], row[1], row[2], row[3]
+                if (network == "Any" or network == self.resource.tags.network.value) and (
+                        crime == "Any" or crime in crimeslist):
+                    generatorlist.append(row)
+            self.generatorlist = generatorlist
+            message = self.GetRandomVariant("TXT", 2, generatorlist, crimeslist)
+            message = message.replace("GRRR", self.GetRandomVariant("GRRR", 2, self.generatorlist, crimeslist))
+            message = message.replace("APPP", self.GetRandomVariant("APPP", 2, self.generatorlist, crimeslist))
+            message = message.replace("RSSS", self.GetRandomVariant("RSSS", 2, self.generatorlist, crimeslist))
+            message = message.replace("GBBB", self.GetRandomVariant("GBBB", 2, self.generatorlist, crimeslist))
+            message = message.replace("BLLL", self.GetRandomVariant("BLLL", 2, self.generatorlist, crimeslist))
+            message = message.replace("ENDD", self.GetRandomVariant("ENDD", 2, self.generatorlist, crimeslist))
+            message = message.replace("GREET", self.GetRandomVariant("GREET", 2, self.generatorlist, crimeslist))
+            message = message.replace("PREV", self.GetRandomVariant("PREV", 2, self.generatorlist, crimeslist))
+            message = message.replace("FACT", self.GetRandomVariant("FACT", 2, self.generatorlist, crimeslist))
+            message = message.replace("EXPL", self.GetRandomVariant("EXPL", 2, self.generatorlist, crimeslist))
+            message = message.replace("DEMD", self.GetRandomVariant("DEMD", 2, self.generatorlist, crimeslist))
+            if (self.resource.tags.type == Type.AC or self.resource.tags.type == Type.CH) and self.linkscopy != None and self.linkscopy != []:
 
-                    message = message.replace("RSIN", self.GetRandomVariant("RSIN", 2, self.generatorlist, crimeslist))
-                    message = message.replace("RES1", self.GetRandomVariant("RES", 2, self.generatorlist, crimeslist))
-                    message = message.replace("RES2", self.GetRandomVariant("RES", 2, self.generatorlist, crimeslist))
-                    message = message.replace("RES3", self.GetRandomVariant("RES", 2, self.generatorlist, crimeslist))
-                    message = message.replace("RES4", self.GetRandomVariant("RES", 2, self.generatorlist, crimeslist))
-                    message = message.replace("GBIN", self.GetRandomVariant("GBIN", 2, self.generatorlist, crimeslist))
-                    message = message.replace("VR1", self.GetRandomVariant("VR", 2, self.generatorlist, crimeslist))
-                    message = message.replace("VR2", self.GetRandomVariant("VR", 2, self.generatorlist, crimeslist))
-                    message = message.replace("VR3", self.GetRandomVariant("VR", 2, self.generatorlist, crimeslist))
-                    message = message.replace("VR4", self.GetRandomVariant("VR", 2, self.generatorlist, crimeslist))
-                    message = message.replace("VR5", self.GetRandomVariant("VR", 2, self.generatorlist, crimeslist))
-                else:
-                    message = message.replace("RSIN", "")
-                    message = message.replace("RES1", "")
-                    message = message.replace("RES2", "")
-                    message = message.replace("RES3", "")
-                    message = message.replace("RES4", "")
-                    message = message.replace("GBIN", "")
-                    message = message.replace("VR1", "")
-                    message = message.replace("VR2", "")
-                    message = message.replace("VR3", "")
-                    message = message.replace("VR4", "")
-                    message = message.replace("VR5", "")
-                    message = message.replace("*dn*", "\n")
-                    message = message.replace("*n*", "\n")
-                    for i in range(2,11):
-                        m = ""
-                        for j in range(0,i):
-                            m+="\n"
-                        message = message.replace(m, "\n")
-                message = message.replace("PREN", self.GetRandomVariant("PREN", 2, self.generatorlist, crimeslist))
-                message = message.replace("RQOF", self.GetRandomVariant("RQOF", 2, self.generatorlist, crimeslist))
-                message = message.replace("FDEM", self.GetRandomVariant("FDEM", 2, self.generatorlist, crimeslist))
-                message = message.replace("LSWD", self.GetRandomVariant("LSWD", 2, self.generatorlist, crimeslist))
-                message = message.replace("SIGN", self.GetRandomVariant("SIGN", 2, self.generatorlist, crimeslist))
-                message = message.replace("{NTWRK}", self.resource.tags.network.value)
-                message = message.replace("{TYPE}", self.resource.tags.type.value)
-                message = message.replace("{ALINK}", self.resource.links.alink)
-                message = message.replace("{NICK}", self.nick)
-                message = message.replace("*dn*", " \n\n ")
-                message = message.replace("*n*", " \n ")
+                message = message.replace("RSIN", self.GetRandomVariant("RSIN", 2, self.generatorlist, crimeslist))
+                message = message.replace("RES1", self.GetRandomVariant("RES", 2, self.generatorlist, crimeslist))
+                message = message.replace("RES2", self.GetRandomVariant("RES", 2, self.generatorlist, crimeslist))
+                message = message.replace("RES3", self.GetRandomVariant("RES", 2, self.generatorlist, crimeslist))
+                message = message.replace("RES4", self.GetRandomVariant("RES", 2, self.generatorlist, crimeslist))
+                message = message.replace("GBIN", self.GetRandomVariant("GBIN", 2, self.generatorlist, crimeslist))
+                message = message.replace("VR1", self.GetRandomVariant("VR", 2, self.generatorlist, crimeslist))
+                message = message.replace("VR2", self.GetRandomVariant("VR", 2, self.generatorlist, crimeslist))
+                message = message.replace("VR3", self.GetRandomVariant("VR", 2, self.generatorlist, crimeslist))
+                message = message.replace("VR4", self.GetRandomVariant("VR", 2, self.generatorlist, crimeslist))
+                message = message.replace("VR5", self.GetRandomVariant("VR", 2, self.generatorlist, crimeslist))
+            else:
+                message = message.replace("RSIN", "")
+                message = message.replace("RES1", "")
+                message = message.replace("RES2", "")
+                message = message.replace("RES3", "")
+                message = message.replace("RES4", "")
+                message = message.replace("GBIN", "")
+                message = message.replace("VR1", "")
+                message = message.replace("VR2", "")
+                message = message.replace("VR3", "")
+                message = message.replace("VR4", "")
+                message = message.replace("VR5", "")
+                message = message.replace("*dn*", "\n")
+                message = message.replace("*n*", "\n")
+            for i in range(2,11):
+                m = ""
+                for j in range(0,i):
+                    m+="\n"
+                message = message.replace(m, "\n")
+            message = message.replace("PREN", self.GetRandomVariant("PREN", 2, self.generatorlist, crimeslist))
+            message = message.replace("RQOF", self.GetRandomVariant("RQOF", 2, self.generatorlist, crimeslist))
+            message = message.replace("FDEM", self.GetRandomVariant("FDEM", 2, self.generatorlist, crimeslist))
+            message = message.replace("LSWD", self.GetRandomVariant("LSWD", 2, self.generatorlist, crimeslist))
+            message = message.replace("SIGN", self.GetRandomVariant("SIGN", 2, self.generatorlist, crimeslist))
+            message = message.replace("{NTWRK}", self.resource.tags.network.value)
+            message = message.replace("{TYPE}", self.resource.tags.type.value)
+            message = message.replace("{ALINK}", self.resource.links.alink)
+            message = message.replace("{NICK}", self.nick)
+            message = message.replace("*dn*", " \n\n ")
+            message = message.replace("*n*", " \n ")
 
-                # DON'T UNCOMMENT!
-                # message = self.NLProcessing(message)
+            # DON'T UNCOMMENT!
+            # message = self.NLProcessing(message)
 
-                self.header = self.GetRandomVariant("HEADER", 2, generatorlist, crimeslist)
-                self.header = self.header.replace("{NTWRK}", self.resource.tags.network.value)
-                self.header = self.header.replace("{TYPE}", self.resource.tags.type.value)
-            except FileNotFoundError:
-                raise FileNotFoundError
+            self.header = self.GetRandomVariant("HEADER", 2, generatorlist, crimeslist)
+            self.header = self.header.replace("{NTWRK}", self.resource.tags.network.value)
+            self.header = self.header.replace("{TYPE}", self.resource.tags.type.value)
         else:
             generatorlist = []
-            try:
-                f = open(self.message_source, "r")
-                csvr = csv.reader(f, dialect="excel")
-                for row in csvr:
-                    key, network, type, content = row[0], row[1], row[2], row[3]
-                    if (network == "Any" or network == self.resource.tags.network.value) and (
-                            type == "Any" or type == self.resource.tags.type):
-                        generatorlist.append(row)
-                f.close()
-                message = self.GetRandomVariant("TXT", 3, generatorlist, crimeslist)
-                message = message.replace("INTR", self.GetRandomVariant("INTR", 3, generatorlist, crimeslist))
-                message = message.replace("MAIN", self.GetRandomVariant("MAIN", 3, generatorlist, crimeslist))
-                message = message.replace("BLCK", self.GetRandomVariant("BLCK", 3, generatorlist, crimeslist))
-                message = message.replace("{TYPE}", self.resource.tags.type.value)
-                message = message.replace("{NTWRK}", self.resource.tags.network.value)
-                message = message.replace("*n*", "\n")
-            except FileNotFoundError:
-                raise FileNotFoundError
+            for row in self.mssrc:
+                key, network, type, content = row[0], row[1], row[2], row[3]
+                if (network == "Any" or network == self.resource.tags.network.value) and (
+                        type == "Any" or type == self.resource.tags.type):
+                    generatorlist.append(row)
+            message = self.GetRandomVariant("TXT", 3, generatorlist, crimeslist)
+            message = message.replace("INTR", self.GetRandomVariant("INTR", 3, generatorlist, crimeslist))
+            message = message.replace("MAIN", self.GetRandomVariant("MAIN", 3, generatorlist, crimeslist))
+            message = message.replace("BLCK", self.GetRandomVariant("BLCK", 3, generatorlist, crimeslist))
+            message = message.replace("{TYPE}", self.resource.tags.type.value)
+            message = message.replace("{NTWRK}", self.resource.tags.network.value)
+            message = message.replace("*n*", "\n")
+
+        if random.choice([True,False]):
+            translator = tr.GoogleTranslate()
+            message = translator.translate(message, "Ukrainian").result
+        message = self.AntiSpamParsing(message)
+        if self.complainttype == Report.EMAIL:
+            self.header = self.AntiSpamParsing(self.header)
         return message
 
     def GetRandomVariant(self, key, contentkey, variantslist, crimes):

@@ -19,14 +19,14 @@ class Network(Enum):
 
 
 class Crimes(Enum):
-    mup = "murdered people"
-    aup = "anti-ukranian propaganda"
-    hsp = "hate speech to Ukranian people"
+    mup = "images/videos murdered people"
+    aup = "anti-ukrainian propaganda"
+    hsp = "messages of hate speech to Ukrainian people"
     msc = "photos/videos of shelling cities for the Russian propaganda"
     pwr = "propaganda of the war"
     pkp = "propaganda of ruthless killing people"
     iui = "information that undermines the integrity of Ukraine"
-    ofs = "offensive speech"
+    ofs = "offensive speech messages"
     dfk = "disinformation and distribution fakes"
     dpd = "distribution of personal data and information"
 class CrimesSwitcher:
@@ -52,4 +52,4 @@ class Type(Enum):
     # Types of publications:
     VD = "video"
     TW = "tweet"
-    GN = "publication"
+    GN = "post"
