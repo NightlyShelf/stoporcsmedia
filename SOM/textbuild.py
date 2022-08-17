@@ -20,6 +20,10 @@ class Report(Enum):
 
 
 class TextBuilder:
+
+    emesrc = ""
+    mssrc = ""
+
     def __init__(self, resource, complainttype, nick):
         self.resource = resource
         self.complainttype = complainttype
@@ -42,21 +46,21 @@ class TextBuilder:
         except LookupError:
             nltk.download("omw-1.4")
         '''
-
-    def LoadSources(self, email_source, message_source):
+    @staticmethod
+    def LoadSources(email_source, message_source):
         try:
             with open(email_source, "r") as es:
-                self.emsrc = csv.reader(es, dialect="excel")
+                Task.emsrc = csv.reader(es, dialect="excel")
                 temp = []
-                for row in self.emsrc:
+                for row in Task.emsrc:
                     temp.append(row)
-                self.emsrc = temp
+                Task.emsrc = temp
             with  open(message_source, "r") as ms:
-                self.mssrc = csv.reader(ms, dialect="excel")
+                Task.mssrc = csv.reader(ms, dialect="excel")
                 temp = []
-                for row in self.mssrc:
+                for row in Task.mssrc:
                     temp.append(row)
-                self.mssrc = temp
+                Task.mssrc = temp
         except Exception as ex:
             raise ex
 
@@ -193,7 +197,7 @@ class TextBuilder:
             crimeslist.append(crime.value)
         if (self.complainttype == Report.EMAIL):
             generatorlist = []
-            for row in self.emsrc:
+            for row in Task.emsrc:
                 network, crime, content, key = row[0], row[1], row[2], row[3]
                 if (network == "Any" or network == self.resource.tags.network.value) and (
                         crime == "Any" or crime in crimeslist):
@@ -258,7 +262,7 @@ class TextBuilder:
             self.header = self.header.replace("{TYPE}", self.resource.tags.type.value)
         else:
             generatorlist = []
-            for row in self.mssrc:
+            for row in Task.mssrc:
                 key, network, type, content = row[0], row[1], row[2], row[3]
                 if (network == "Any" or network == self.resource.tags.network.value) and (
                         type == "Any" or type == self.resource.tags.type):
