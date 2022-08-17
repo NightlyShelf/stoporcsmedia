@@ -172,6 +172,15 @@ class TextBuilder:
             result += char
         return result
 
+    def ReplaceKeys(self, data):
+        data = data.replace("{NTWRK}", self.resource.tags.network.value)
+        data = data.replace("{TYPE}", self.resource.tags.type.value)
+        data = data.replace("{ALINK}", self.resource.links.alink)
+        data = data.replace("{NICK}", self.nick)
+        data = data.replace("*dn*", " \n\n ")
+        data = data.replace("*n*", " \n ")
+
+        return data
     def build(self):
         message = ""
         crimeslist = []
@@ -239,12 +248,7 @@ class TextBuilder:
             message = message.replace("FDEM", self.GetRandomVariant("FDEM", 2, self.generatorlist, crimeslist))
             message = message.replace("LSWD", self.GetRandomVariant("LSWD", 2, self.generatorlist, crimeslist))
             message = message.replace("SIGN", self.GetRandomVariant("SIGN", 2, self.generatorlist, crimeslist))
-            message = message.replace("{NTWRK}", self.resource.tags.network.value)
-            message = message.replace("{TYPE}", self.resource.tags.type.value)
-            message = message.replace("{ALINK}", self.resource.links.alink)
-            message = message.replace("{NICK}", self.nick)
-            message = message.replace("*dn*", " \n\n ")
-            message = message.replace("*n*", " \n ")
+            message = self.ReplaceKeys(message)
 
             # DON'T UNCOMMENT!
             # message = self.NLProcessing(message)
@@ -263,9 +267,7 @@ class TextBuilder:
             message = message.replace("INTR", self.GetRandomVariant("INTR", 3, generatorlist, crimeslist))
             message = message.replace("MAIN", self.GetRandomVariant("MAIN", 3, generatorlist, crimeslist))
             message = message.replace("BLCK", self.GetRandomVariant("BLCK", 3, generatorlist, crimeslist))
-            message = message.replace("{TYPE}", self.resource.tags.type.value)
-            message = message.replace("{NTWRK}", self.resource.tags.network.value)
-            message = message.replace("*n*", "\n")
+            message = self.ReplaceKeys(message)
 
         if random.choice([True,False]):
             translator = tr.GoogleTranslate()
@@ -317,8 +319,8 @@ class TextBuilder:
             return r
         else:
             return rn.choice(self.variants)[contentkey]
-    # NOT WORKING, corrupts text with incorrect synonymous (is it a bug of AI?)
-    # EDIT: Tested, it is a bug of AI of using incorrect words. Let's don't use it, maybe we should use file with synonyms instead?
+
+    # NOT WORKING, corrupts text with incorrect synonymous
     """
     def NLProcessing(self, text):
         final = text
