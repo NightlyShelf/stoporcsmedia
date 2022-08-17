@@ -14,6 +14,7 @@ from SOM.task import *
 # iui[lnk=https:/twitter.com/gazetaru[exl=iui#https://twitter.com/GazetaRu/status/1534849682576445440?s=20`t
 # =1ZyTeGS74miMYloG6kep7g~dfk#https://twitter.com/GazetaRu/status/1534842132388892674?s=20`t=NAKVMpiBdSNDlzlUi1v4NQ
 # -dataout=test.pcl
+from SOM.textbuild import Report
 
 
 class CMode(Enum):
@@ -100,7 +101,7 @@ class Compiler:
             else:
                 if consolemode:
                     print(
-                        "Error occured: Invaild key (" + key + ") provided. Check it rightness and restart the program.\nExit code: 2.")
+                        "Error occurred: Invaild key (" + key + ") provided. Check it rightness and restart the program.\nExit code: 2.")
                     input()
                     sys.exit(2)
                 return "Invaild key"
@@ -309,7 +310,7 @@ class Compiler:
         if network == None or type == None or crimes == None or thelink == None or reporttype == None:
             if consolemode:
                 print(
-                    "Problem occured: Error while creating Ressource object. Seems to be incorrect data provided. Contact the technical administrator. Press Enter to skip or write Exit to exit...")
+                    "Problem occurred: Error while creating Ressource object. Seems to be incorrect data provided. Contact the technical administrator. Press Enter to skip or write Exit to exit...")
                 a = input()
                 if a.lower() == "exit":
                     print("Exiting...")
@@ -349,7 +350,7 @@ class Compiler:
                     print("Successfully wrote to file!")
                 except Exception:
                     print(
-                        "Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
+                        "Error occurred while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
                     sys.exit(1)
             else:
@@ -361,7 +362,7 @@ class Compiler:
                     print("Successfully wrote to file!")
                 except Exception:
                     print(
-                        "Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
+                        "Error occurred while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
                     sys.exit(1)
         elif self.mode == CMode.AUTO:
@@ -378,7 +379,7 @@ class Compiler:
 
             except Exception as ex:
                 print(
-                    "Error occured: unable to read or parse " + self.datain + ". Check its availability and try again.")
+                    "Error occurred: unable to read or parse " + self.datain + ". Check its availability and try again.")
                 input()
                 sys.exit(1)
             if self.links == []:
@@ -398,7 +399,7 @@ class Compiler:
                     print("Successfully wrote to file!")
                 except Exception as ex:
                     print(
-                        "Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
+                        "Error occurred while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
                     sys.exit(1)
             else:
@@ -411,7 +412,7 @@ class Compiler:
                     print("Successfully wrote to file!")
                 except Exception as ex:
                     print(
-                        "Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
+                        "Error occurred while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
                     sys.exit(1)
         elif self.mode == CMode.TESTING:
@@ -427,7 +428,7 @@ class Compiler:
                 print("Success!")
             except Exception as ex:
                 print(
-                    "Error occured: unable to read or parse " + self.datain + ". Check its availability and try again.")
+                    "Error occurred: unable to read or parse " + self.datain + ". Check its availability and try again.")
                 input()
                 sys.exit(1)
             for obj in objects:
@@ -441,7 +442,7 @@ class Compiler:
                         print("Success!")
                 except Exception as ex:
                     print(
-                        "Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
+                        "Error occurred while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
                     sys.exit(1)
             else:
@@ -452,7 +453,7 @@ class Compiler:
                         print("Success!")
                 except Exception as ex:
                     print(
-                        "Error occured while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
+                        "Error occurred while writing to file: " + self.dataout + ". Try again or choose another file/location.\nExiting...")
                     input()
                     sys.exit(1)
 
@@ -476,7 +477,7 @@ if __name__ == "__main__":
                 mode = CMode.TESTING
             else:
                 print(
-                    f"Error occured: Invaild value of the -mode argument ({0}). Check it and restart the program.\nExit code: 2",
+                    f"Error occurred: Invaild value of the -mode argument ({0}). Check it and restart the program.\nExit code: 2",
                     arg)
                 input()
                 sys.exit(2)
@@ -489,7 +490,7 @@ if __name__ == "__main__":
                 wmode = WriteMode.ADDTOEXISTING
             else:
                 print(
-                    f"Error occured: Invaild value of the -wmode argument ({0}). Check it rightness and restart the program.\nExit code: 2.",
+                    f"Error occurred: Invaild value of the -wmode argument ({0}). Check it rightness and restart the program.\nExit code: 2.",
                     arg)
                 input()
                 sys.exit(2)

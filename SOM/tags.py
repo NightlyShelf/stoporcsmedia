@@ -1,14 +1,14 @@
 from enum import Enum
 
 
-class Tags():
-    def __init__(self, network, type, crimes):
+class Tags:
+    def __init__(self, network, _type, crimes):
         self.network = network
         self.crimes = crimes
-        self.type = type
+        self.type = _type
 
 
-#IF EDITING, CONSIDER YOU CHANGED IT IN compiler.py (GenerateManual function)
+# IF EDITING, CONSIDER YOU CHANGED IT IN compiler.py (GenerateManual function)
 class Network(Enum):
     IN = "Instagram"
     FB = "Facebook"
@@ -29,6 +29,8 @@ class Crimes(Enum):
     ofs = "offensive speech messages"
     dfk = "disinformation and distribution fakes"
     dpd = "distribution of personal data and information"
+
+
 class CrimesSwitcher:
     switcher = {
         "mup": Crimes.mup,
@@ -43,6 +45,7 @@ class CrimesSwitcher:
         "pkp": Crimes.pkp,
         "pwr": Crimes.pwr
     }
+
 
 class Type(Enum):
     # Accounts:
