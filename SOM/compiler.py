@@ -2,13 +2,13 @@ import pickle as pc
 import sys
 import urllib.error
 import urllib.request
-
+from enum import Enum
 import bs4
 
 from SOM.links import *
 from SOM.resource import *
 from SOM.task import *
-
+from SOM.tags import *
 
 # MANUAL MODE TEST: compiler.exe -mode=manual -wmode=rewrite -datain=rt=email[f=acnt[n=twtr[c=iui,dfk,hsp,
 # iui[lnk=https:/twitter.com/gazetaru[exl=iui#https://twitter.com/GazetaRu/status/1534849682576445440?s=20`t
@@ -29,7 +29,7 @@ class WriteMode(Enum):
 
 
 class Compiler:
-    TASKTYPECOEF = 6
+    TASKTYPECOEF = 4
 
     def __init__(self, mode=None, wmode=None, datain=None, dataout=None):
         self.mode = mode
@@ -163,6 +163,8 @@ class Compiler:
             if consolemode:
                 print("Network: Telegram")
             network = Network.TG
+            if "/s/" in link:
+                link = link.replace("/s/","")
             try:
                 webpage = urllib.request.urlopen(link)
                 source = webpage.read()
@@ -254,9 +256,14 @@ class Compiler:
             else:
                 reporttype = Report.MESSAGE
         # Facebook
-        elif "facebook.com/" in link:
+        elif "facebook.com/" in link or "fb.watch/" in link or "fb.com/" in link:
             network = Network.FB
-            type = Type.AC
+            if "/posts/" in link:
+                type = Type.GN
+            elif "fb.watch" in link:
+                type = Type.VD
+            else:
+                type = Type.AC
             crimes = []
             for i in range(random.randint(4, 8)):
                 crimes.append(random.choice(list((CrimesSwitcher.switcher.values()))))
@@ -292,7 +299,7 @@ class Compiler:
         # YouTube
         elif "youtube.com/" in link:
             network = Network.YT
-            if "watch" in link:
+            if "watch?" in link:
                 type = Type.VD
                 crimes = []
                 for i in range(random.randint(4, 8)):
@@ -476,9 +483,7 @@ if __name__ == "__main__":
             elif arg == "testing":
                 mode = CMode.TESTING
             else:
-                print(
-                    f"Error occurred: Invaild value of the -mode argument ({0}). Check it and restart the program.\nExit code: 2",
-                    arg)
+                print("Error occurred: Invaild value of the -mode argument ("+ arg +"). Check it rightness and restart the program.\nExit code: 2.")
                 input()
                 sys.exit(2)
             continue
@@ -489,9 +494,7 @@ if __name__ == "__main__":
             elif arg == "add":
                 wmode = WriteMode.ADDTOEXISTING
             else:
-                print(
-                    f"Error occurred: Invaild value of the -wmode argument ({0}). Check it rightness and restart the program.\nExit code: 2.",
-                    arg)
+                print("Error occurred: Invaild value of the -wmode argument ("+ arg +"). Check it rightness and restart the program.\nExit code: 2.")
                 input()
                 sys.exit(2)
             continue
@@ -509,19 +512,19 @@ if __name__ == "__main__":
             print(f"Unrecognized argument " + arg + ". Check it rightness and restart the program.\nExit code: 2.")
             input()
             sys.exit(2)
-    if mode:
+    if not mode:
         print("Error (Missing mode). Seems to be \"-mode\" argument missing or incorrect data provided?")
         input()
         sys.exit(2)
-    if wmode:
+    if not wmode:
         print("Error (Missing writing mode). Seems to be \"-wmode\" argument missing or incorrect data provided?")
         input()
         sys.exit(2)
-    if datain:
+    if not datain:
         print("Error (Missing input data). Seems to be \"-datain\" argument missing or incorrect data provided?")
         input()
         sys.exit(2)
-    if dataout:
+    if not dataout:
         print("Error (Missing output data). Seems to be \"-dataout\" argument missing or incorrect data provided?")
         input()
         sys.exit(2)
