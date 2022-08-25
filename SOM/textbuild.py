@@ -1,11 +1,11 @@
 import copy as cp
 import random as rn
-import random
 import csv
 import translatepy.translators.google as tr
-
-from SOM.tags import *
+from enum import Enum
 from SOM.task import *
+from SOM.tags import *
+
 
 
 # Now we don't use nltk in connection with bugs :(
@@ -13,15 +13,15 @@ from SOM.task import *
 # import nltk
 # from nltk.corpus import wordnet as wn
 
+
 class Report(Enum):
     EMAIL = 1
     MESSAGE = 2
 
 
-
 class TextBuilder:
 
-    emesrc = ""
+    emsrc = ""
     mssrc = ""
 
     def __init__(self, resource, complainttype, nick):
@@ -50,17 +50,17 @@ class TextBuilder:
     def LoadSources(email_source, message_source):
         try:
             with open(email_source, "r") as es:
-                Task.emsrc = csv.reader(es, dialect="excel")
+                TextBuilder.emsrc = csv.reader(es, dialect="excel")
                 temp = []
-                for row in Task.emsrc:
+                for row in TextBuilder.emsrc:
                     temp.append(row)
-                Task.emsrc = temp
+                TextBuilder.emsrc = temp
             with  open(message_source, "r") as ms:
-                Task.mssrc = csv.reader(ms, dialect="excel")
+                TextBuilder.mssrc = csv.reader(ms, dialect="excel")
                 temp = []
-                for row in Task.mssrc:
+                for row in TextBuilder.mssrc:
                     temp.append(row)
-                Task.mssrc = temp
+                TextBuilder.mssrc = temp
         except Exception as ex:
             raise ex
 
@@ -69,108 +69,108 @@ class TextBuilder:
         for char in text:
 
             if char == "o":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "о"
             elif char == "о":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "o"
 
             if char == "e":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "е"
             elif char == "е":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "e"
 
             if char == "E":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "Е"
             elif char == "Е":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "E"
 
             if char == "О":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "O"
             elif char == "O":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "О"
 
             if char == "A":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "А"
             elif char == "А":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "A"
 
             if char == "a":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "а"
             elif char == "а":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "a"
 
             if char == "Н":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "Н"
             elif char == "Н":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "Н"
 
             if char == "T":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "Т"
             elif char == "Т":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "T"
 
             if char == "К":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "K"
             elif char == "K":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "К"
 
             if char == "C":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "С"
             elif char == "С":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "C"
 
             if char == "c":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "с"
             elif char == "с":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "c"
 
             if char == "i":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "і"
             elif char == "і":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "i"
 
             if char == "р":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "p"
             elif char == "p":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "р"
 
             if char == "Р":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "P"
             elif char == "P":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "Р"
 
             if char == "B":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "В"
             elif char == "В":
-                if random.choice([True, False]):
+                if rn.choice([True, False]):
                     char = "B"
 
             result += char
@@ -186,6 +186,9 @@ class TextBuilder:
 
         return data
     def build(self):
+        if(self.emsrc == "" or self.mssrc == ""):
+            print("Error. Sources are not defined.")
+            return "Sorry, text is not available right now. Please try again later or contact the support."
         message = ""
         crimeslist = []
         self.linkscopy = None
@@ -197,7 +200,7 @@ class TextBuilder:
             crimeslist.append(crime.value)
         if (self.complainttype == Report.EMAIL):
             generatorlist = []
-            for row in Task.emsrc:
+            for row in TextBuilder.emsrc:
                 network, crime, content, key = row[0], row[1], row[2], row[3]
                 if (network == "Any" or network == self.resource.tags.network.value) and (
                         crime == "Any" or crime in crimeslist):
@@ -262,7 +265,7 @@ class TextBuilder:
             self.header = self.header.replace("{TYPE}", self.resource.tags.type.value)
         else:
             generatorlist = []
-            for row in Task.mssrc:
+            for row in TextBuilder.mssrc:
                 key, network, type, content = row[0], row[1], row[2], row[3]
                 if (network == "Any" or network == self.resource.tags.network.value) and (
                         type == "Any" or type == self.resource.tags.type):
@@ -273,7 +276,7 @@ class TextBuilder:
             message = message.replace("BLCK", self.GetRandomVariant("BLCK", 3, generatorlist, crimeslist))
             message = self.ReplaceKeys(message)
 
-        if random.choice([True,False]):
+        if rn.choice([True,False]):
             translator = tr.GoogleTranslate()
             message = translator.translate(message, "Ukrainian").result
         message = self.AntiSpamParsing(message)
@@ -296,18 +299,21 @@ class TextBuilder:
             r = rn.choice(self.variants)
             res = r[contentkey]
             self.variants.remove(r)
-            if(self.linkscopy == []):
+            #if(self.linkscopy == []):
 
                 #print("Using again;" , self.linkscopy)
-                exlink = rn.choice(self.linkscopy2)
-                res = res.replace("{LINK}", exlink.link)
-                res = res.replace("{CTNT}", exlink.crime.value)
-                return res
+                #exlink = rn.choice(self.linkscopy2)
+                #res = res.replace("{LINK}", exlink.link)
+                #res = res.replace("{CTNT}", exlink.crime.value)
+                #return res
             #print(rn.choice(self.linkscopy))
             exlink = rn.choice(self.linkscopy)
             res = res.replace("{LINK}", exlink.link)
             res = res.replace("{CTNT}", exlink.crime.value)
-            self.linkscopy.remove(exlink)
+
+            # Need to solve this: embed the minimal count of crimes or found another solution
+
+            #self.linkscopy.remove(exlink)
             return res
         elif ("VR" == key):
             r = rn.choice(self.variants)
@@ -319,7 +325,10 @@ class TextBuilder:
             for i in range(1, 5):
                 crime = rn.choice(crimes)
                 r = r.replace("{CTNT" + str(i) + "}", crime)
-                crimes.remove(crime)
+
+                #Need to solve this: embed the minimal count of crimes or found another solution
+
+                #crimes.remove(crime)
             return r
         else:
             return rn.choice(self.variants)[contentkey]
