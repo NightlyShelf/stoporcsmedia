@@ -1,8 +1,4 @@
 import random
-
-from SOM.textbuild import *
-from SOM.tags import *
-import urllib.parse
 class Task():
 
     emailsource = "Email.csv"
@@ -12,12 +8,13 @@ class Task():
     def __init__(self, form, resource):
         self.form = form
         self.resource = resource
+        self.VERSION = "1.0"
 
     def GenerateMessage(self):
+        from SOM.textbuild import TextBuilder, Report
+        from SOM.tags import Network
         builder = TextBuilder(self.resource, self.form, Task.nick)
-        builder.LoadSources(self.emailsource, self.messagesource)
         self.message = builder.build()
-
         if self.form == Report.EMAIL:
             self.header = builder.header
             if self.resource.tags.network == Network.TG:
@@ -35,6 +32,7 @@ class Task():
                 self.recipient = "support@google.com"
             else:
                 print("Twitter emailing is not supported.")
+                self.recipient = "support@twitter.com"
             return [self.recipient, self.header, self.message]
         else:
             return self.message
