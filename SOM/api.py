@@ -91,15 +91,22 @@ class API:
     #Step 5: Get random object or generate a message/email!
 
     def GetRandomTask(self):
-        if len(self.objects) == 0:
-            if not self.objects_cp == []:
-                self.objects = copy.deepcopy(self.objects_cp)
+        if not self.objects:
+            if self.allowRepeating:
+                if not self.objects_cp == []:
+                    self.objects = copy.deepcopy(self.objects_cp)
+                else:
+                    if self.DEBUG:
+                        print("[GetRandomTask()] ERROR: list of the task's is empty. Seems to be RepeatingMode is off or error while loading the objects.")
+                    return None
             else:
                 if self.DEBUG:
                     print("[GetRandomTask()] ERROR: list of the task's is empty. Seems to be RepeatingMode is off or error while loading the objects.")
                 return None
         task = random.choice(self.objects)
         if not self.allowRepeating:
+            if self.DEBUG:
+                print("Removing object...")
             self.objects.remove(task)
         return task
 
