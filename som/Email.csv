@@ -1,0 +1,129 @@
+Any,Any,GRRR*dn*APPP*dn*RSSS*dn*GBBB,TXT
+Any,Any,GRRR*dn*APPP*dn*RSSS*dn*BLLL*dn*ENDD,TXT
+Any,Any,APPP*dn*RSSS*dn*BLLL*dn*ENDD,TXT
+Any,Any,GRRR*dn*APPP*dn*RSSS*dn*ENDD,TXT
+Any,Any,GRRR*dn*APPP*dn*RSSS*dn*GBBB*dn*BLLL*dn*ENDD,TXT
+Any,Any,APPP*dn*RSSS*dn*BLLL,TXT
+Any,Any,GRRR*dn*APPP*dn*ENDD,TXT
+Any,Any,GREET,GRRR
+Any,Any,PREV*n*FACT*n*EXPL*n*DEMD,APPP
+Any,Any,FACT*n*DEMD,APPP
+Any,Any,FACT*n*EXPL*n*DEMD,APPP
+Any,Any,PREV*n*FACT*n*DEMD,APPP
+Any,Any,RSIN*n*RES1*n*RES4*n*RES2,RSSS
+Any,Any,RSIN*n*RES2*n*RES3*n*RES4*n*RES1,RSSS
+Any,Any,RSIN*n*RES3*n*RES1*n*RES2*n*RES4,RSSS
+Any,Any,GBIN*n*VR1*n*VR3*n*VR2*n*VR5,GBBB
+Any,Any,GBIN*n*VR2*n*VR3*n*VR1,GBBB
+Any,Any,GBIN*n*VR4*n*VR1*n*VR2*n*VR4,GBBB
+Any,Any,GBIN*n*VR1*n*VR2*n*VR3*n*VR5*n*VR4,GBBB
+Any,Any,PREN RQOF FDEM,BLLL
+Any,Any,PREN RQOF FDEM,BLLL
+Any,Any,FDEM,BLLL
+Any,Any,LSWD*dn*SIGN,ENDD
+Any,Any,SIGN,ENDD
+Any,Any,LSWD,ENDD
+Any,Any,Dear esteemed {NTWRK} support,GREET
+Any,Any,Dear {NTWRK} team,GREET
+Any,Any,Dear {NTWRK} ,GREET
+Any,Any,"Hello, esteemed {NTWRK} Team",GREET
+Any,Any,"Hello, esteemed {NTWRK} Support",GREET
+Any,Any,Dear  esteemed {NTWRK} Team,GREET
+Any,Any,"Hello,  {NTWRK} Team",GREET
+Any,Any,"Hi, esteemed {NTWRK} Support",GREET
+Any,Any,I have been surfing the net and I saw that {TYPE} with forbidden content: {ALINK}.,PREV
+Any,Any,The following content of that {TYPE} ({ALINK}) is not allowed by rules.,FACT
+Twitter,Any,The following {TYPE} ({ALINK}) and its tweets isn't allowed by rules.,FACT
+Twitter,Any,Tweets of this {TYPE} ({ALINK}) are forbidden by international laws.,FACT
+Any,Any,Content of this {TYPE} ({ALINK}) are forbidden by the international laws.,FACT
+Any,Any,I found that {TYPE} ({ALINK}) is posting illegal and forbidden content.,FACT
+Any,Any,{NTWRK} {TYPE} {ALINK} is posting illegal and not allowed by {NTWRK}  and ethic rules content.,FACT
+Any,Any,"{TYPE} {ALINK} spreading false and illegal inforamation, which can cause deaths.",FACT
+Any,Any,"Publications by {ALINK} can cause deaths, because it posts fake and harmful information.",FACT
+Any,Any,"Content, posted by this {TYPE} ({ALINK}) is unlawful and dangerous.",FACT
+Any,Any,"{ALINK} providing unsafe and illegal content, which can cause deaths.",FACT
+Telegram,Any,"That {TYPE} publishes hardcore video about deaths, poses a threat to life of Ukrainian civilians, sharing false information and russian propaganda, calls to murdering of innocent people, sharing terroristic and nazi expressions, making corrections to the shelling. etc.",EXPL
+Telegram,Any,"{TYPE} undermines the integrity of Ukraine, calls to murder Ukrainian people, sharing false information, hardcore videos of Ukrainian civilians death.",EXPL
+Telegram,Any,"This account's aim is to kill innocent civilians of Ukraine, shelling Ukrainian cities and civil infrastructure, support military  dictature of V. Putin and war against Ukraine.",EXPL
+Any,Any,"Following account publish content with propaganda of war, killing Ukrainian civilians, shelling Ukrainian cities and supporting thiefs and terrorism.",EXPL
+Any,Any,"It posts content of hating and killing of Ukrainian people, supports war and shelling of Ukrainian cities.",EXPL
+Any,Any,"This account publish content of killing and murdering of Ukrainian people, calls to war and suppports terrorism.",EXPL
+Any,Any,"I am asking you to check and block following account, in particular for violation of rules.",DEMD
+Telegram,Any,"I am asking you to check and block following {TYPE}, in particular for violation of rules.",DEMD
+Any,Any,"So, I am asking you to check and block that, as soon as possible.",DEMD
+Any,Any,"However, I ask for checking and processing with that, under international law.",DEMD
+Any,Any,"Please, check and block it.",DEMD
+Any,Any,"However, my complain isn't groundless, the next examples with violations:",RSIN
+Any,Any,"My report is not groundless, because:",RSIN
+Any,Any,Here is evidence of my complain: ,RSIN
+Any,Any,Here is some examples of content with violations:,RSIN
+Any,Any,- {LINK} - content of {CTNT};,RES
+Any,Any,- {LINK} - publication of {CTNT};,RES
+Any,Any,- {LINK} - post of {CTNT};,RES
+Any,Any,- {LINK} - material of {CTNT};,RES
+Any,Any,- {LINK} - message of {CTNT};,RES
+Any,Any,The content posted by this account violate next rules:,GBIN
+Any,Any,Content posted by this account violates next rules:,GBIN
+Any,Any,I found next violations:,GBIN
+Telegram,Any,This {TYPE} has next violations of Telegram's rules:,GBIN
+Any,murdered people,- publishing the content with the deceased or assassinated persons;,VR
+Any,murdered people, - publication scenes with ruthless killed civil people;,VR
+Any,hate speech to Ukrainian people, - publication hate speech about situation in Ukraine and Ukrainian people;,VR
+Any,hate speech to Ukrainian people, - naziz-like speech about Ukraine and Ukrainian people;,VR
+Any,anti-Ukrainian propaganda, - propaganda of destroying Ukraine as a country and killing people;,VR
+Any,anti-Ukrainian propaganda," - anti-Ukrainian propaganda, which can cause deaths and murdering people;",VR
+Any,anti-Ukrainian propaganda, - propaganda of russian military occupation of Ukraine,VR
+Any,propaganda of the war, - propaganda of war  (Article 436 of the Criminal Code of Ukraine),VR
+Any,propaganda of the war, - propaganda of aggressive war against soverign country of Ukraine,VR
+Any,propaganda of the war, - propaganda of aggressive and ruthless war,VR
+Any,photos/videos of shelling cities for the Russian propaganda, - photos/videos of shelling cities for the Russian propaganda,VR
+Any,photos/videos of shelling cities for the Russian propaganda, - content of shelling cities in purposes of war propaganda,VR
+Any,propaganda of the war, - propaganda of war in form of special military operation and propaganda of killing people,VR
+Any,propaganda of ruthless killing people, - abusing people and appeals to violence,VR
+Any,propaganda of ruthless killing people, - propaganda and appeals of ruthless killing people,VR
+Any,information that undermines the integrity of Ukraine," - content that undermines integrity of Ukraine (appeals to conquesting territories, shelling cities, etc)",VR
+Any,information that undermines the integrity of Ukraine, - appeals to conquesting or appropriation of Ukrainian territories to Russia Federation or unrecognized republics DNR/LNR,VR
+Any,information that undermines the integrity of Ukraine, - fake information about occupated territories of Ukraine by Russia Federation military,VR
+Any,offensive speech," - offensive speech about Ukraine, Ukraine territories and people",VR
+Any,offensive speech, - offensive speech to Ukrainian refugees,VR
+Any,disinformation and distribution fakes, - fake information about war in Ukraine,VR
+Any,disinformation and distribution fakes, - sharing fakes in purposes of  Russian propaganda,VR
+Any,disinformation and distribution fakes, - sharing fake and untruthful information by Russian propaganda,VR
+Any,disinformation and distribution fakes, - untruthful inforamtion about life in occupated by Russia territories,VR
+Any,distribution of personal data and information, - sharing personal data of people,VR
+Any,distribution of personal data and information, - violating rules about confidential information,VR
+Any,distribution of personal data and information, - distribution of closed and personal information,VR
+Any,Any,"So, ",PREN
+Any,Any,"In connection with above, ",PREN
+Any,Any,"As well I said,",PREN
+Any,Any,"To sum up,",PREN
+Any,Any,"under international law,",RQOF
+Any,Any,"under international law and laws of Ukraine country,",RQOF
+Any,Any,"according to international law and rules of platform,",RQOF
+Any,Any,"according to the rules of platform,",RQOF
+Any,Any,"I applying to you with a request to check and block that {TYPE}, that undermines rules.",FDEM
+Any,Any,Please check and block this content as soon as possible!,FDEM
+Any,Any,I hope that {NTWRK} admins will check and block infringing content.,FDEM
+Any,Any,"I sincerely hope that {NTWRK} administration will check and block content that undermines rules, in the name of freedom and liberty.",FDEM
+Any,Any,"Please review and check my apply as soon as possible, because of many people can death or be murdered  because of that.",LSWD
+Any,Any,"Please, check my complaint as soon as possible.",LSWD
+Any,Any,"I hope so much that you check my complaint as soon as possible, because the many innocent civil people dies right now.",LSWD
+Any,Any,"Please, check and block infringing content which can cause deaths of Ukrainian people.",LSWD
+Any,Any,"Sincerely, {NICK}.",SIGN
+Any,Any,"Yours faithfully, {NICK}.",SIGN
+Any,Any,"Thanks a lot, {NICK}.",SIGN
+Any,Any,"Regards, {NICK}.",SIGN
+Any,Any,Complaint about publication that violates rules of {NTWRK},HEADER
+Any,Any,Report about the publication that violates {NTWRK} rules,HEADER
+Any,Any,Complaint,HEADER
+Any,Any,Complaint about the publication of prohibited content,HEADER
+Any,Any,Report about the publication of prohibited content,HEADER
+Any,Any,Content that violating the rules of the platform,HEADER
+Any,Any,Content that violating the rules of the {NTWRK},HEADER
+Any,Any,About the platform's rules violations,HEADER
+Any,Any,About the {NTWRK} rules violations,HEADER
+Any,Any,Violating of the rules,HEADER
+Any,Any,Publications of unlawful content,HEADER
+Any,Any,Publications of unlawful content on the {NTWRK},HEADER
+Any,Any,Complaint about the unlawful content,HEADER
+Any,Any,Complaint about the prohibited content,HEADER

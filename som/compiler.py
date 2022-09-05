@@ -2,19 +2,20 @@ import pickle as pc
 import sys
 import urllib.error
 import urllib.request
-from enum import Enum
+
 import bs4
 
-from SOM.links import *
-from SOM.resource import *
-from SOM.task import *
-from SOM.tags import *
+from enum import Enum
 
+from som.links import *
+from som.resource import *
+from som.tags import *
+from som.task import *
 # MANUAL MODE TEST: compiler.exe -mode=manual -wmode=rewrite -datain=rt=email[f=acnt[n=twtr[c=iui,dfk,hsp,
-# iui[lnk=https:/twitter.com/gazetaru[exl=iui#https://twitter.com/GazetaRu/status/1534849682576445440?s=20`t
-# =1ZyTeGS74miMYloG6kep7g~dfk#https://twitter.com/GazetaRu/status/1534842132388892674?s=20`t=NAKVMpiBdSNDlzlUi1v4NQ
+# iui[lnk=https:/twitter.com/gazetaru[exl=iui#https://twitter.com/GazetaRu/status/1534849682576445440?s=20%26t
+# =1ZyTeGS74miMYloG6kep7g~dfk#https://twitter.com/GazetaRu/status/1534842132388892674?s=20%26t=NAKVMpiBdSNDlzlUi1v4NQ
 # -dataout=test.pcl
-from SOM.textbuild import Report
+from som.textbuild import Report
 
 
 class CMode(Enum):
@@ -24,7 +25,7 @@ class CMode(Enum):
 
 
 class WriteMode(Enum):
-    REWRITE = "rewrt"
+    REWRITE = "rewrite"
     ADDTOEXISTING = "add"
 
 
@@ -86,6 +87,7 @@ class Compiler:
                 continue
             elif "lnk=" in key:
                 content_link = key.replace("lnk=", "")
+                content_link = content_link.replace("%26", "&")
                 continue
             # Not obligatory
             elif "exl=" in key:
@@ -94,7 +96,7 @@ class Compiler:
                 for link in links:
                     exkey, exlink = link.split("#")
                     exkey = CrimesSwitcher.switcher.get(exkey)
-                    exlink = exlink.replace("`", "&")
+                    exlink = exlink.replace("%26", "&")
                     linksfin.append(Exlink(exkey, exlink))
                 content_clinks = linksfin
                 continue

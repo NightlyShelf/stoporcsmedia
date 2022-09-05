@@ -10,12 +10,12 @@ class Tags:
 
 # IF EDITING, CONSIDER YOU CHANGED IT IN compiler.py (GenerateManual function)
 class Network(Enum):
-    IN = "Instagram"
-    FB = "Facebook"
-    TT = "TikTok"
-    TG = "Telegram"
-    TW = "Twitter"
-    YT = "Youtube"
+        IN = "Instagram"
+        FB = "Facebook"
+        TT = "TikTok"
+        TG = "Telegram"
+        TW = "Twitter"
+        YT = "Youtube"
 
 
 class Crimes(Enum):

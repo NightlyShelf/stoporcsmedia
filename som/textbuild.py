@@ -3,8 +3,8 @@ import random as rn
 import csv
 import translatepy.translators.google as tr
 from enum import Enum
-from SOM.task import *
-from SOM.tags import *
+from som.task import *
+from som.tags import *
 
 
 

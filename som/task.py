@@ -11,8 +11,8 @@ class Task():
         self.VERSION = "1.0"
 
     def GenerateMessage(self):
-        from SOM.textbuild import TextBuilder, Report
-        from SOM.tags import Network
+        from som.textbuild import TextBuilder, Report
+        from som.tags import Network
         builder = TextBuilder(self.resource, self.form, Task.nick)
         self.message = builder.build()
         if self.form == Report.EMAIL:

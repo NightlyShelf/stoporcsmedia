@@ -1,9 +1,9 @@
 import random
 import copy
-from SOM.textbuild import *
-from SOM.task import *
-from SOM.resource import *
-from SOM.links import *
+from som.textbuild import *
+from som.task import *
+from som.resource import *
+from som.links import *
 from pickle import loads, dumps, UnpicklingError
 
 
