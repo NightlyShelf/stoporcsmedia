@@ -11,6 +11,7 @@ from som.links import *
 from som.resource import *
 from som.tags import *
 from som.task import *
+from som.textbuild import *
 # MANUAL MODE TEST: compiler.exe -mode=manual -wmode=rewrite -datain=rt=email[f=acnt[n=twtr[c=iui,dfk,hsp,
 # iui[lnk=https:/twitter.com/gazetaru[exl=iui#https://twitter.com/GazetaRu/status/1534849682576445440?s=20%26t
 # =1ZyTeGS74miMYloG6kep7g~dfk#https://twitter.com/GazetaRu/status/1534842132388892674?s=20%26t=NAKVMpiBdSNDlzlUi1v4NQ
@@ -339,6 +340,7 @@ class Compiler:
         text += "Resource link: " + str(task.resource.links.alink) + "\n"
         text += "Crimes: " + str(task.resource.tags.crimes) + "\n"
         text += "Exlinks: " + str(task.resource.links.exlinks) + "\n"
+        TextBuilder.LoadSources(Task.emailsource, Task.messagesource)
         text += "Report sample: " + str(task.GenerateMessage()) + "\n\n"
         return text
 
