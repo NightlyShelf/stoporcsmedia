@@ -1,7 +1,9 @@
-from task import *
+import som.textbuild
+from som.task import *
 from som.resource import *
-from tags import *
-from links import *
+from som.textbuild import *
+from som.tags import *
+from som.links import *
 # Serialization
 while True:
     testres = Resource(Tags(Network.TW, Type.AC, [Crimes.iui, Crimes.dfk, Crimes.hsp, Crimes.ofs]),
@@ -14,13 +16,14 @@ while True:
                                                              #Exlink(Crimes.iui,
                                                                     #"https://twitter.com/GazetaRu/status/1534823512694833152?s=20&t=NAKVMpiBdSNDlzlUi1v4NQ")]))
     b = Task(Report.EMAIL, testres)
-    b.SetNick("Test")
+    b.nick = "Test"
+    TextBuilder.LoadSources(Task.emailsource, Task.messagesource)
     print("This test shows you how this module works. You can see the email and message to support below, which is almost unique.")
     print("--------------------------------------------------------------")
     print("Email:")
     print("--------------------------------------------------------------")
     b.form = Report.EMAIL
-    print(b.GenerateMessage() + "\n")
+    print(b.GenerateMessage())
     print("--------------------------------------------------------------")
     b.form = Report.MESSAGE
     print("Message:")
