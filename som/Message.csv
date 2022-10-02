@@ -3,26 +3,26 @@ INTR,Any,Any,"Hello,"
 INTR,Any,Any,"Hi dear {NTWRK} support,"
 INTR,Any,Any,
 INTR,Any,Any,"Hi, dear {NTWRK} support"
-MAIN,Any,Channel,"this channel spreads and publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
-MAIN,Any,Channel,"this channel publish {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
-MAIN,Any,Channel,"channel distributes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"This channel spreads and publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"That channel  broadcasts and publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"This channel releases and posts {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
 MAIN,Any,Channel,"this channel distributes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
 MAIN,Any,Channel,"this channel distributes {CTNT1}, {CTNT2},  and {CTNT3}."
 MAIN,Any,Channel,"channel publish {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
 MAIN,Any,Channel,"I want to complain about that this channel spreads and publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
-MAIN,Any,Channel,"I'd like to complain about that this channel publish {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,Channel,"I want to complain about this channel propagating and releasing {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
 MAIN,Any,Channel,"I want to complain about that this channel distributes {CTNT1}, {CTNT2}, and {CTNT3}."
 MAIN,Any,Channel,"I want to report about that channel publish {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
 MAIN,Any,Channel,"I'd like to report about that this channel distributes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
-MAIN,Any,Channel,"I want to complain about that this channel distributes {CTNT1}, {CTNT2},  and {CTNT3}."
+MAIN,Any,Channel,"I want to lament what this channel distributes {CTNT1}, {CTNT2}, and {CTNT3}."
 MAIN,Any,Channel,"I'd like to complain that this channel spreads and publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
 MAIN,Any,ACCOUNT,"My complaint is about that this account publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
-MAIN,Any,ACCOUNT,"my complaint is about that this account publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
-MAIN,Any,ACCOUNT,"My complaint is about that this account distributes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,ACCOUNT,"My complaint relates to the fact that this account releases {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,ACCOUNT,"My complaint is in relation to this account distributes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
 MAIN,Any,ACCOUNT,"my report is about that this account distributes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
 MAIN,Any,ACCOUNT,"This account distributes {CTNT1}, {CTNT2}, and {CTNT3}."
 MAIN,Any,ACCOUNT,"This account publishes {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
-MAIN,Any,ACCOUNT,"That account is publisher of {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
+MAIN,Any,ACCOUNT,"This account provides {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
 MAIN,Any,ACCOUNT,"That account is publisher of {CTNT1}, {CTNT2}, and {CTNT3}."
 MAIN,Any,ACCOUNT,"I want to complain that this account is a publisher of {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
 MAIN,Any,ACCOUNT,"I’d like to report that this account is publisher of the {CTNT1}, {CTNT2}, and {CTNT3}."
@@ -39,7 +39,7 @@ MAIN,Any,Any,"This {TYPE} distributes {CTNT1}, {CTNT2}, {CTNT3}, {CTNT4}."
 MAIN,Any,Any,"I want to report about that it contains{CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
 MAIN,Any,Any,"I'd like to complain about this {TYPE}, because it contains {CTNT1}, {CTNT2}, {CTNT3} and {CTNT4}."
 MAIN,Any,Any,"This {TYPE} contains {CTNT1}, {CTNT2}, {CTNT4}."
-MAIN,Any,Any,"I want to complain about information that violates rules and has a parts of {CTNT4}, {CTNT1}, {CTNT2} and {CTNT3}."
+MAIN,Any,Any,"I want to complain about information that violates the rules and has a part of {CTNT4}, {CTNT1}, {CTNT2} and {CTNT3}."
 MAIN,Any,Any,"My complaint is about this {TYPE} that contains {CTNT1}, {CTNT2}, {CTNT4} and {CTNT3}."
 MAIN,Any,Any,"I want to complain because of this {TYPE} that contains {CTNT2}, {CTNT3}, {CTNT4} and {CTNT1}."
 BLCK,Any,Any,Please block it because of it's illegality!
@@ -50,9 +50,12 @@ BLCK,Any,Channel,This channel is illegal. Block it to avoid deaths!
 BLCK,Any,Any,This {TYPE} can cause deaths of civil people. Block it!
 BLCK,Any,Any,Please review my report and block it!
 BLCK,Any,Any,"This {TYPE} helps to kill innocent Ukrainian people, block it!"
-BLCK,Any,Any,Please review my complain  and block that {TYPE}!
+BLCK,Any,Any,Please consider my complaint and stop {TYPE}!
 BLCK,Any,Any,"This report isn't groundless, check  and block the following {TYPE}!"
 BLCK,Any,Any,Please block it as soon as possible!
 BLCK,Any,Any,"Please, block it to avoid deaths asap!"
 TXT,Any,Any,INTR*n*MAIN*n*BLCK
 TXT,Any,Any,MAIN*n*BLCK
+BLCK,Any,Any,Kindly review my complaint and block {TYPE}!
+BLCK,Any,Any,"This report is not unfounded, check and block the next {TYPE}!"
+BLCK,Any,Any,"That {TYPE} contributes to killing innocent Ukrainians, block it!"
